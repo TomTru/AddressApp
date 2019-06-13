@@ -13,15 +13,18 @@ class ReqChecker {
         $addresses = $request['data'];
 
         foreach ($addresses as $address) {
-            $url = 'http://' . $address;
-            $check = get_headers($url);
+            
+            if (stripos($address, 'http') === false) {
+                $address = 'http://' . $address;
+            }
+
+            $check = get_headers($address);
             $code = explode(' ', $check[0])[1];
             $codes[$address]['code'] = $code;
 
             if ($code === '301') {
-                $codes[$address]['movedTo'] = 'test';
+                $codes[$address]['movedTo'] = $this->getLocation($check);
             }
-
         }
 
         return $codes;
@@ -33,6 +36,15 @@ class ReqChecker {
 
     public function checkThird($request) {
         return $request;
+    }
+
+    protected function getLocation($respArr) {
+        foreach ($respArr as $item) {
+            if(strpos($item, 'Location:') !== false) {
+                return $item;
+            }
+        }
+        return 'brak';
     }
 
 }
