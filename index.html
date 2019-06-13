@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>AddressApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+
+    <div class="jumbotron text-center">
+        <h2>AddressApp</h2>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="usr">Wprowadź adresy:</label>
+                    <textarea rows=5 class="form-control" id="ad1" name="ad1"></textarea>
+                    <button type="button" class="btn" onclick="checkFirst()">Sprawdź</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="usr">Adresy, słowa kluczowe i linki (oddziel średnikiem)</label>
+                    <textarea rows=5 class="form-control" id="ad2" name="ad2"></textarea>
+                    <button type="button" class="btn" onclick="checkSecond()">Sprawdź</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="usr">Adresy i linki (oddziel średnikiem)</label>
+                    <textarea rows=5 class="form-control" id="ad3" name="ad3"></textarea>
+                    <button type="button" class="btn" onclick="checkThird()">Sprawdź</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                
+            </div>
+            <div class="col-sm-4">
+                
+            </div>
+            <div class="col-sm-4">
+                
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
