@@ -1,28 +1,21 @@
-function checkFirst() {
-    let fn = 'checkFirst';
-    let elem = $('#ad1').val().split('\n');
+function check(index, which) {
+    const ulId = 'ad' + index + 'ul';
+    clearUl(ulId);
+    let fn = 'check' + which;
+    let elem = $('#ad' + index).val().split('\n');
     const obj = {
         method: fn,
         data: elem
     };
 
-    clearUl('ad1ul');
     $.ajax({
         type: 'POST',
         url: 'app.php',
         data: obj,
         success: function(resp) {
-            insertToDom(resp, 'ad1ul');
+            insertToDom(resp, ulId);
         }
     });
-}
-
-function checkSecond() {
-    let elem = $('#ad2').val().split('\n');    
-}
-
-function checkThird() {
-    let elem = $('#ad3').val().split('\n');
 }
 
 function insertToDom(response, ulId) {
