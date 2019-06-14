@@ -18,9 +18,8 @@ function check(index, which) {
                     insertToDom(resp, ulId);
                     break;
                 case 'ad2ul':
-                    insertToDom2(resp, ulId);
-                    break;
                 case 'ad3ul':
+                    insertToDom2(resp, ulId);
                     break;
             }
         }
@@ -45,7 +44,7 @@ function insertToDom2(response, ulId) {
     const parsedResp = JSON.parse(response);
 
     for (i in parsedResp) {
-        let liItem = '<li>' + parsedResp + '</li>';
+        let liItem = '<li>' + parsedResp[i] + '</li>';
         $('#' + ulId).append(liItem);
     }
     
