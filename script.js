@@ -13,7 +13,16 @@ function check(index, which) {
         url: 'app.php',
         data: obj,
         success: function(resp) {
-            insertToDom(resp, ulId);
+            switch(ulId) {
+                case 'ad1ul':
+                    insertToDom(resp, ulId);
+                    break;
+                case 'ad2ul':
+                    insertToDom2(resp, ulId);
+                    break;
+                case 'ad3ul':
+                    break;
+            }
         }
     });
 }
@@ -30,6 +39,16 @@ function insertToDom(response, ulId) {
         liItem += '</li>';
         $('#' + ulId).append(liItem);
     });
+}
+
+function insertToDom2(response, ulId) {
+    const parsedResp = JSON.parse(response);
+
+    for (i in parsedResp) {
+        let liItem = '<li>' + parsedResp + '</li>';
+        $('#' + ulId).append(liItem);
+    }
+    
 }
 
 function clearUl(id) {

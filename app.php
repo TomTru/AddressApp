@@ -11,7 +11,7 @@ class ReqChecker {
     public function checkFirst($request) {
 
         if(!$request['data']) {
-            return false;
+            return '';
         }
 
         $codes = [];
@@ -33,7 +33,7 @@ class ReqChecker {
 
     public function checkSecond($request) {
         if (!$request['data']) {
-            return false;
+            return '';
         }
 
         $resp = [];
@@ -41,7 +41,27 @@ class ReqChecker {
             $parts = explode(';', $item);
             $url = $this->checkProtocolExists($parts[2]);
             $htmlContent = file_get_contents($url);
-            $resp[] = $htmlContent;
+
+            if ($htmlContent) {
+                $domContent = new DOMDocument();
+                @$domContent->loadHTML($htmlContent);
+                $anchors = $domContent->getElementsByTagName('a');
+                $foundedItems = [];
+                foreach($anchors as $a) {
+                    $trimmedKeyword = trim($a->nodeValue);
+                    if ($parts[1] === $trimmedKeyword && $parts[0] === $a->getAttribute("href")) {
+                        $tItem = utf8_decode('Link: "' . $parts[2] . '" zawiera adres "' . $parts[0] . '" i słowo kluczowe "' . $parts[1] . '"');
+                        $foundedItems[] = $tItem;
+                        $resp[] = $tItem;
+                    }
+                }
+
+            }
+
+            if (count($foundedItems) === 0) {
+                $resp[] = utf8_decode('Link: "' . $parts[2] . '" nie zawiera adresu "' . $parts[0] . '" i słowa kluczowego "' . $parts[1] . '"');
+            }
+
         }
 
         return $resp;
@@ -65,6 +85,10 @@ class ReqChecker {
             $url = 'http://' . $url;
         }
         return $url;
+    }
+
+    protected function makeEmptyResult() {
+
     }
 
 }
